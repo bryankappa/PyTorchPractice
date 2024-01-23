@@ -94,5 +94,5 @@ batch_out = netG(batch_t)
 
 out_t = (batch_out.data.squeeze() + 1.0) / 2.0
 out_img = transforms.ToPILImage()(out_t)
-out_img.save('../Data/zebra.jpg')
-out_img
+# out_img.save('../Data/zebra.jpg')
+# out_img
