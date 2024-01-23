@@ -18,7 +18,7 @@ preprocess = transforms.Compose([
     )])
 
 
-img = Image.open("bobby.jpg")
+img = Image.open(r'C:\Users\brand\Documents\Data Science Statistics Book\Pytorch_learning\PyTorchPractice\Chapter1\Data\bobby.jpg')
 
 img.show()
 
@@ -33,7 +33,7 @@ resnet.eval()
 out = resnet(batch_t)
 print(out)
 
-with open('imagenet_classes.txt') as f:
+with open(r'C:\Users\brand\Documents\Data Science Statistics Book\Pytorch_learning\PyTorchPractice\Chapter1\Data\imagenet_classes.txt') as f:
     labels = [line.strip() for line in f.readlines()]
 
 _, index = torch.max(out, 1)
