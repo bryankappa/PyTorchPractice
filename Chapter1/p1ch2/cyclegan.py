@@ -86,7 +86,7 @@ print(netG.eval())
 preprocess = transforms.Compose([transforms.Resize(256),
                                  transforms.ToTensor()])
 
-img = Image.open(r'C:\Users\brand\Documents\Data Science Statistics Book\Pytorch_learning\PyTorchPractice\Chapter1\Data\horse.jpg')
+img = Image.open(r'C:\Users\brand\Documents\Data Science Statistics Book\Pytorch_learning\PyTorchPractice\Chapter1\Data\bobby.jpg')
 img_t = preprocess(img)
 batch_t = torch.unsqueeze(img_t, 0)
 
@@ -94,5 +94,5 @@ batch_out = netG(batch_t)
 
 out_t = (batch_out.data.squeeze() + 1.0) / 2.0
 out_img = transforms.ToPILImage()(out_t)
-# out_img.save('../Data/zebra.jpg')
-# out_img
+out_img.save('../Data/zebra.jpg')
+out_img
