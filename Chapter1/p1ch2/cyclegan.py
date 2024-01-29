@@ -3,13 +3,25 @@ import torch.nn as nn
 from PIL import Image
 from torchvision import transforms
 
-class ResNetBlock(nn.Module): # <1>
+class ResNetBlock(nn.Module):
+    """
+    Residual block for the ResNetGenerator.
+    """
 
     def __init__(self, dim):
         super(ResNetBlock, self).__init__()
         self.conv_block = self.build_conv_block(dim)
 
     def build_conv_block(self, dim):
+        """
+        Build the convolutional block for the ResNetBlock.
+
+        Args:
+            dim (int): Number of input and output channels.
+
+        Returns:
+            nn.Sequential: Convolutional block.
+        """
         conv_block = []
 
         conv_block += [nn.ReflectionPad2d(1)]
@@ -26,14 +38,34 @@ class ResNetBlock(nn.Module): # <1>
         return nn.Sequential(*conv_block)
 
     def forward(self, x):
-        out = x + self.conv_block(x) # <2>
+        """
+        Forward pass of the ResNetBlock.
+
+        Args:
+            x (torch.Tensor): Input tensor.
+
+        Returns:
+            torch.Tensor: Output tensor.
+        """
+        out = x + self.conv_block(x)
         return out
 
 
 class ResNetGenerator(nn.Module):
+    """
+    Residual Network (ResNet) generator for image-to-image translation.
+    """
 
-    def __init__(self, input_nc=3, output_nc=3, ngf=64, n_blocks=9): # <3> 
+    def __init__(self, input_nc=3, output_nc=3, ngf=64, n_blocks=9):
+        """
+        Initialize the ResNetGenerator.
 
+        Args:
+            input_nc (int): Number of input channels.
+            output_nc (int): Number of output channels.
+            ngf (int): Number of filters in the generator.
+            n_blocks (int): Number of ResNet blocks.
+        """
         assert(n_blocks >= 0)
         super(ResNetGenerator, self).__init__()
 
@@ -73,7 +105,16 @@ class ResNetGenerator(nn.Module):
 
         self.model = nn.Sequential(*model)
 
-    def forward(self, input): # <3>
+    def forward(self, input):
+        """
+        Forward pass of the ResNetGenerator.
+
+        Args:
+            input (torch.Tensor): Input tensor.
+
+        Returns:
+            torch.Tensor: Output tensor.
+        """
         return self.model(input)
 
 netG = ResNetGenerator()
